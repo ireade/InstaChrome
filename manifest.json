@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "InstaChrome",
-    "description": "This ",
+    "description": "An extension for chrome that displays Instagram posts from a tag of your choice.",
     "version": "1",
 
     "chrome_url_overrides":{

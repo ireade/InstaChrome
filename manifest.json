@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+
+    "name": "InstaChrome",
+    "description": "This ",
+    "version": "1",
+
+    "chrome_url_overrides":{
+        "newtab" : "index.html"
+    },
+
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+
+    "content_security_policy": "script-src 'self' 'unsafe-eval' https://api.instagram.com; object-src 'self'"
+}

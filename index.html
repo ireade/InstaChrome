@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>New Tab</title>
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:300,400,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<div class="container">
+
+		<header>
+
+			<form id="search">
+				<label for="searchText">Input an instagram tag</label>
+
+				<span class="hastag">#</span>
+				<input type="text" placeholder="What are you looking for?" id="searchText">
+
+				<!-- <input type="submit" id="submit" value="Go"> -->
+			</form>
+
+		</header>
+
+
+		<span class="loading">
+			<div class="spinner">
+				<div class="mask">
+					<div class="maskedCircle"></div>
+				</div>
+			</div>
+		</span>
+
+
+		<ul id="grams"></ul>
+
+		<script id="grams-template" type="text/x-handlebars-template">
+		{{#each Grams}}
+			<li class="gram">
+			<a href="{{link}}" target="_blank"><img src="{{images.low_resolution.url}}"></a>
+			<a class="gram-meta" href="https://instagram.com/{{user.username}}" target="_blank">
+				<span>
+					{{likes.count}} <span class="heart">&#10084;</span><br>
+					{{user.full_name}}
+				</span>
+			</a>
+			</li>
+		{{/each}}
+		</script>
+
+
+		
+	</div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/access-token.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

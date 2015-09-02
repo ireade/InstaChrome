@@ -1,0 +1,289 @@
+/* CSS Reset Based on -
+ *    Eric Meyer's Reset CSS v2.0 (http://cssreset.com)
+ *    Paul Irish's Box Sizing Reset (http://www.paulirish.com/2012/box-sizing-border-box-ftw/)
+ *    CSS Mojo's clearfix (http://cssmojo.com/latest_new_clearfix_so_far/)
+ */
+ 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Box sizing */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Clearfix */
+
+.cf:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+
+
+/* Loading Animation */
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* Loading animation container */
+.loading {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	width: 28px;
+	height: 28px;
+	margin: -14px 0 0 -14px;
+}
+
+/* Spinning circle (inner circle) */
+.loading .maskedCircle {
+	width: 40px;
+	height: 40px;
+	border-radius: 24px;
+	border: 6px solid plum;
+}
+
+/* Spinning circle mask */
+.loading .mask {
+	width: 24px;
+	height: 24px;
+	overflow: hidden;
+}
+
+/* Spinner */
+.loading .spinner {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	width: 52px;
+	height: 52px;
+	animation: spin 1s infinite linear;
+}
+
+
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; 
+}
+
+
+
+
+
+/* */
+
+
+.container {
+	width: 90%;
+	max-width: 960px;
+	margin: 5% auto;
+}
+
+
+
+header {
+	text-align: center;
+	padding: 40px 20px;
+	font-size: 2rem;
+}
+
+
+#grams {
+	list-style-type: none;
+	text-align: center;
+}  
+
+.gram {
+	display: inline-block;
+	width: 32%;
+	padding: 20px;
+	position: relative;
+}
+
+.gram img {
+	width: 100%;
+	height: auto;
+}
+
+.gram .gram-meta {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: block;
+
+	z-index: 50;
+	background-color: rgba(255, 255, 255, 0.9);
+
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.5s, opacity 0.5s;
+
+}
+
+.gram-meta > span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	
+}
+
+
+.gram:hover .gram-meta {
+	visibility: visible;
+	opacity: 1;
+	transition: visibility 0.5s, opacity 0.5s;
+}
+
+
+
+
+/* Form */
+
+.hastag {
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	font-weight: 600;
+	color: plum;
+	font-size: 3rem;
+
+	display: none;
+}
+
+label[for="searchText"] {
+	position: absolute;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+input[type="text"] {
+	
+	width: 80%;
+	max-width: 400px;
+
+	font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
+	font-size: 3rem;
+	text-align: center;
+
+
+	border: 0;
+	border-bottom: 3px solid #fff;
+	height: 50px;
+
+	outline: none;
+
+}
+
+input[type="text"]:focus {
+	border-bottom: 3px solid plum; 
+}
+
+
+input[type="submit"] {
+	height: 35px;
+	width: 35px;
+	display: inline-block;
+	top: -10px;
+	background-color: plum;
+	color: white;
+	border-radius: 50%;
+	border: 0;
+
+	font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
+	font-size: 1.4rem;
+
+	cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

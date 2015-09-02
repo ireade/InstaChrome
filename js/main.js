@@ -33,13 +33,11 @@ $(document).ready(function() {
 				var template = Handlebars.compile(source);
 				var output = template( {Grams: items} );
 
-				
+				$('.loading').hide();
+
 				if (data.data.length === 0) {
-					$('.loading').hide();
-					$("#grams").html('<p class="message">Sorry, nothing turned up! Please try again</p>')
-					
+					$('.message-error').show();
 				} else {
-					$('.loading').hide();
 					$("#grams").html(output).fadeIn();
 				}
 			});
@@ -47,20 +45,20 @@ $(document).ready(function() {
 
 		}); // end get local storage
 
-	}; // end apiRequest
+	}; // end request
+
+	
 
 	$('#search').on('submit', function() {
 
+		$('.message').hide();
 		$("#grams").html("");
 		$('.loading').show();
 
 		var searchInput = $('#searchText').val();
 
-
 		chrome.storage.local.set({"tag" : searchInput}, function(){
-
 			request();
-
 		});
 
 		return false;
@@ -68,7 +66,8 @@ $(document).ready(function() {
 
 
 
-	chrome.storage.local.get("sertag", function(result) {
+
+	chrome.storage.local.get("tag", function(result) {
 
 		if ( result.tag ) {
 
@@ -78,7 +77,7 @@ $(document).ready(function() {
 		} else {
 
 			$('.loading').hide();
-			$("#grams").html('<p class="message">Welcome to InstaChrome!</p>')
+			$('.message-welcome').show();
 			
 		}
 

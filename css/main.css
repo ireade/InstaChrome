@@ -110,7 +110,7 @@ html {
 
 
 html {
-    font-size: 62.5%;
+    font-size: 50%;
 }
 
 body {
@@ -152,7 +152,7 @@ p {
 
 .container {
 	width: 90%;
-	max-width: 960px;
+	max-width: 750px;
 	margin: 5% auto;
 }
 

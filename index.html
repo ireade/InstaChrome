@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>New Tab</title>
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:300,400,600' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:300,600' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -11,17 +11,14 @@
 	<div class="container">
 
 		<header>
-
 			<form id="search">
 				<label for="searchText">Input an instagram tag</label>
-
 				<span class="hastag">#</span>
 				<input type="text" placeholder="e.g. #yolo" id="searchText">
-
-				<!-- <input type="submit" id="submit" value="Go"> -->
 			</form>
-
 		</header>
+
+
 
 
 		<span class="loading">
@@ -32,7 +29,9 @@
 			</div>
 		</span>
 		
-		<!-- -->
+
+
+
 		<div class="message message-welcome">
 			<h2>Welcome to InstaChrome!</h2>
 
@@ -40,15 +39,19 @@
 
 			<p>All you have to do is use the search bar above to search for your first tag. Whenever you open a new tab, your tag will be remembered.</p>
 
-			<p>Want to know how this extension was created? You can read <a href="#">my blog post about it here</a>.</p>
+			<p>Want to know how this extension was created? You can read <a href="http://bitsofco.de/2015/instachrome">my blog post about it here</a>.</p>
 		</div>
 
 		<div class="message message-error">
-			
+			Sorry, your search does ont have any results. Please try again.
 		</div>
 
 
+
+
 		<ul id="grams"></ul>
+
+
 
 		<script id="grams-template" type="text/x-handlebars-template">
 		{{#each Grams}}
@@ -67,7 +70,6 @@
 
 		
 	</div>
-
 
     <script src="js/jquery.min.js"></script>
     <script src="js/handlebars.js"></script>

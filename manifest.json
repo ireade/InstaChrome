@@ -1,15 +1,11 @@
 {
-
-    // The version of manifest.json we are using
     "manifest_version": 2,
 
-    // Required information about the extension
     "name": "InstaChrome",
-    "description": "An extension for chrome that displays Instagram posts from a tag of your choice.",
-    "version": "1",
+    "description": "An replacement 'New Tab' extension that displays the latest Instagram posts from a tag of your choice.",
+    "version": "2",
 
-    // Overriding the default behaviour for a new tab to route to our index.html file
-    "chrome_url_overrides":{
+    "chrome_url_overrides": {
         "newtab" : "index.html"
     },
 
@@ -17,6 +13,11 @@
         "storage"
     ],
 
-    // Allow requests from api.instagram.com
+    "icons": { 
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png" 
+    },
+
     "content_security_policy": "script-src 'self' 'unsafe-eval' https://api.instagram.com; object-src 'self'"
 }

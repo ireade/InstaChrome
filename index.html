@@ -4,9 +4,13 @@
 	<meta charset="utf-8">
 	<title>New Tab</title>
 	<link href='https://fonts.googleapis.com/css?family=Work+Sans:300,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
+	<i class="fa fa-question-circle help-icon" title="help"></i>
+	<i class="fa fa-times help-icon" title="close help"></i>
 
 	<div class="container">
 
@@ -39,8 +43,12 @@
 
 			<p>All you have to do is use the search bar above to search for your first tag. Whenever you open a new tab, your tag will be remembered.</p>
 
-			<p>Want to know how this extension was created? You can read <a href="http://bitsofco.de/2015/instachrome">my blog post about it here</a>.</p>
+			<p>Have a suggestion or need some help? <a href="https://twitter.com/ireaderinokun" target="_blank">Tweet me</a>.</p>
+
+			<p>Want to know how this extension was created? You can read <a href="http://bitsofco.de/instachrome/">my blog post about it here</a>.</p>
 		</div>
+
+
 
 		<div class="message message-error">
 			Sorry, your search does ont have any results. Please try again.
@@ -48,20 +56,26 @@
 
 
 
+		<div class="grams-container">
+			<ul id="grams"></ul>
 
-		<ul id="grams"></ul>
+			<a href="#" class="prev"> <i class="fa fa-chevron-left"></i> </a>
+			<a href="#" class="next"> <i class="fa fa-chevron-right"></i> </a>
+		</div>
 
 
 
 		<script id="grams-template" type="text/x-handlebars-template">
 		{{#each Grams}}
 			<li class="gram">
-			<a href="{{link}}" target="_blank"><img src="{{images.low_resolution.url}}"></a>
+			<a class="gram-image" href="{{link}}" target="_blank">
+				<img src="{{images.low_resolution.url}}">
+			</a>
 			<a class="gram-meta" href="https://instagram.com/{{user.username}}" target="_blank">
-				<span>
-					{{likes.count}} <span class="heart">&#10084;</span><br>
-					{{user.full_name}}
-				</span>
+				<div class="gm-container">
+					<span class="likes">{{likes.count}} <span class="heart">&#10084;</span></span>
+					<span class="user">{{user.full_name}}</span>
+				</div>
 			</a>
 			</li>
 		{{/each}}

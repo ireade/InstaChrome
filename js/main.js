@@ -2,34 +2,55 @@
 
 $(document).ready(function() {
 
+
+	var cleanHashtag = function(tag) {
+		if ( tag.indexOf("#") === -1 ) {
+			// Display tag with # on front end
+			$('input[type="text"]').val('#'+tag);
+		} else {
+			tag = tag.split('#')[1];
+		}
+		tag = tag.replace(/\s/g, "");
+		return tag;
+	}
+
+
+
+	// Number
+	var n = 6;
+	var items_start = 0;
+	var items_end = n;
+
+
 	var request = function() {
 
 		chrome.storage.local.get("tag", function(result) {
 
-			var tag = result.tag;
-			var cleanTag;
-
-			// Display # on the front end, but remove # for the cleanTag variable
-			if ( tag.indexOf("#") === -1 ) {
-				cleanTag = tag;
-				$('input[type="text"]').val('#'+tag);
-			} else {
-				cleanTag = tag.split('#')[1];
-			}
+			var tag = cleanHashtag(result.tag);
 
 
-			cleanTag = cleanTag.replace(/\s/g, "");
 
-			
-			var requestUrl = 'https://api.instagram.com/v1/tags/'+cleanTag+'/media/recent?access_token='+accessToken+'&callback=?';
+
+			var requestUrl = 'https://api.instagram.com/v1/tags/'+tag+'/media/recent?access_token='+accessToken+'&callback=?';
+
+			//var requestUrl = 'https://api.instagram.com/v1/users/studioofmode/media/recent/?access_token=22156862.1fb234f.2bdfa1f73084463cbf628b55878198f0&scope=public_content&callback=?';
+
 
 			$.getJSON(requestUrl, {}, function(data) {
 
+				//console.log(data);
+
 				var items = [];
 
-				// Get only 6 items
-				for (var i=0; i < 6; i++) {
-					items.push(data.data[i]);
+				// 
+				for (var i=items_start; i < items_end; i++) {
+
+					if ( data.data[i] ) {
+						items.push(data.data[i]);
+					} else {
+						$('.next').hide();
+					}
+					
 				}
 
 				// Setup Handlebars templating
@@ -59,9 +80,13 @@ $(document).ready(function() {
 	$('#search').on('submit', function() {
 
 		// Clear messages and any previous images, and show loading animation
+		$('.grams-container').show();
 		$('.message').hide();
 		$("#grams").html("");
 		$('.loading').show();
+		$('.prev').hide();
+		items_start = 0;
+		items_end = n;
 
 		var searchInput = $('#searchText').val();
 
@@ -79,9 +104,9 @@ $(document).ready(function() {
 	chrome.storage.local.get("tag", function(result) {
 
 		if ( result.tag ) {
-
-			request();
+			
 			$('input[type="text"]').val(result.tag);
+			request();
 
 		} else {
 
@@ -91,6 +116,69 @@ $(document).ready(function() {
 		}
 
 	})
+
+
+	if ( items_start === 0 ) {
+		$('.prev').hide();
+	}
+
+
+	$('.next').on('click', function() {
+
+		items_start += n;
+		items_end += n;
+
+		request();
+
+		if ( items_start > 0 ) {
+			$('.prev').show();
+		}
+
+		return false;
+	})
+
+	$('.prev').on('click', function() {
+
+		items_start -= n;
+		items_end -= n;
+
+		request();
+
+		if ( items_start === 0 ) {
+			$('.prev').hide();
+		}
+
+		$('.next').show();
+
+		return false;
+	})
+
+
+
+
+	////
+
+	$('.fa-question-circle').on('click', function() {
+
+		$('.message-welcome').show();
+		$('.fa-times').show();
+		$('.fa-question-circle').hide();
+
+		$('.grams-container').hide();
+
+	});
+
+	$('.fa-times').on('click', function() {
+
+		$('.message-welcome').hide();
+		$('.fa-times').hide();
+		$('.fa-question-circle').show();
+
+		$('.grams-container').show();
+
+	});
+
+
 
 
 });

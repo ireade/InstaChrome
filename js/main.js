@@ -28,17 +28,10 @@ $(document).ready(function() {
 
 			var tag = cleanHashtag(result.tag);
 
-
-
-
 			var requestUrl = 'https://api.instagram.com/v1/tags/'+tag+'/media/recent?access_token='+accessToken+'&callback=?';
-
-			//var requestUrl = 'https://api.instagram.com/v1/users/studioofmode/media/recent/?access_token=22156862.1fb234f.2bdfa1f73084463cbf628b55878198f0&scope=public_content&callback=?';
 
 
 			$.getJSON(requestUrl, {}, function(data) {
-
-				//console.log(data);
 
 				var items = [];
 
@@ -156,19 +149,23 @@ $(document).ready(function() {
 
 
 
-	////
 
-	$('.fa-question-circle').on('click', function() {
+
+	var openMessageBox = document.getElementsByClassName('fa-question-circle')[0];
+
+	openMessageBox.addEventListener('click', function() {
 
 		$('.message-welcome').show();
 		$('.fa-times').show();
 		$('.fa-question-circle').hide();
-
 		$('.grams-container').hide();
 
-	});
+	})
 
-	$('.fa-times').on('click', function() {
+
+	var closeMessageBox = document.getElementsByClassName('fa-times')[0];
+
+	closeMessageBox.addEventListener('click', function() {
 
 		$('.message-welcome').hide();
 		$('.fa-times').hide();
@@ -176,7 +173,9 @@ $(document).ready(function() {
 
 		$('.grams-container').show();
 
-	});
+	})
+
+
 
 
 

@@ -2,15 +2,16 @@
 
 $(document).ready(function() {
 
-
+	//Temprorary cache for data returned during search
+	var data_cache;
+	
 	var cleanHashtag = function(tag) {
 		if ( tag.indexOf("#") === -1 ) {
 			// Display tag with # on front end
 			$('input[type="text"]').val('#'+tag);
-		} else {
-			tag = tag.split('#')[1];
 		}
-		tag = tag.replace(/\s/g, "");
+		//remove #s and collapse whitespaces 
+		tag = tag.replace(/(#+|\s+)/g,"");
 		return tag;
 	}
 
@@ -21,6 +22,39 @@ $(document).ready(function() {
 	var items_start = 0;
 	var items_end = n;
 
+
+	var renderer = function(data) {
+
+		var items = [];
+
+		// 
+		for (var i=items_start; i < items_end; i++) {
+
+			if ( data.data[i] ) {
+				items.push(data.data[i]);
+			} else {
+				$('.next').hide();
+			}
+			
+		}
+
+		// Setup Handlebars templating
+		var source = $('#grams-template').html();
+		var template = Handlebars.compile(source);
+		var output = template( {Grams: items} );
+
+
+		$('.loading').hide();
+
+		if (data.data.length === 0) {
+			// Show error messages if no images for this tag
+			$('.message-error').show();
+		} else {
+			// Else, display the images in the template
+			$("#grams").html(output).fadeIn();
+		}
+
+	};
 
 	var request = function() {
 
@@ -38,36 +72,11 @@ $(document).ready(function() {
 
 			$.getJSON(requestUrl, {}, function(data) {
 
-				//console.log(data);
+				//cache data so we don't need to make new requests everytime next / prev is clicked
+				data_cache = data;
+				//Render data
+				renderer(data);
 
-				var items = [];
-
-				// 
-				for (var i=items_start; i < items_end; i++) {
-
-					if ( data.data[i] ) {
-						items.push(data.data[i]);
-					} else {
-						$('.next').hide();
-					}
-					
-				}
-
-				// Setup Handlebars templating
-				var source = $('#grams-template').html();
-				var template = Handlebars.compile(source);
-				var output = template( {Grams: items} );
-
-
-				$('.loading').hide();
-
-				if (data.data.length === 0) {
-					// Show error messages if no images for this tag
-					$('.message-error').show();
-				} else {
-					// Else, display the images in the template
-					$("#grams").html(output).fadeIn();
-				}
 			});
 
 
@@ -122,13 +131,25 @@ $(document).ready(function() {
 		$('.prev').hide();
 	}
 
+	var do_render = function(data_from_cache) {
+
+		// If data cache is empty. Make request. Else, render next media batch using data_cache
+		// Faster UX as users don't need to wait a few secs/microsecs to view the next media batch
+		if ( !data_from_cache ) {
+			request();
+		}
+		else {
+			renderer(data_cache);
+		}
+
+	};
 
 	$('.next').on('click', function() {
 
 		items_start += n;
 		items_end += n;
 
-		request();
+		do_render(data_cache);		
 
 		if ( items_start > 0 ) {
 			$('.prev').show();
@@ -142,7 +163,7 @@ $(document).ready(function() {
 		items_start -= n;
 		items_end -= n;
 
-		request();
+		do_render(data_cache);
 
 		if ( items_start === 0 ) {
 			$('.prev').hide();
